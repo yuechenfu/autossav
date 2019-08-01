@@ -9,17 +9,7 @@ group = 'com.hiveel'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '11'
 
-repositories {
-	mavenLocal()
-	maven {
-		credentials {
-			username 'hiveel'
-			password 'hiveel'
-		}
-		url "http://172.168.2.16:8001/repository/hiveel/"
-	}
-	mavenCentral()
-}
+
 
 dependencies {
 	//	project
