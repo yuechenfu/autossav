@@ -1,0 +1,54 @@
+server:
+  jetty:
+    max-http-post-size: 0
+  port: 8080
+  servlet:
+    context-path: /autossav
+
+
+h2:
+  console:
+    enabled: true
+
+test:
+  data:
+    examList:
+      - name: test1
+        type: INSPECTION
+
+
+
+feign:
+  hystrix:
+    enabled: true
+
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 300000
+
+autossav:
+  accountServer: http://172.168.2.16:9980/auth
+  uploadServer: http://172.168.2.16:9982/upload
+  pushServer: http://172.168.2.16:9983/push
+
+core:
+  debug: true  #调试开关
+  sendgrid:   #发邮件配置
+    api: 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  #邮件接口api配置
+    sendby: admin@autossav.com
+    templates:                                                      #模板配置
+      REGISTER_NOTIFY: d-6741c33e19484e4ab44bb155790cc23f           #注册后提醒邮件
+      REGISTER_EMAIL: d-32dc62514a6a4fc4b0e8c5650d828133            #注册登录邮箱 发送验证码
+      INSPECTION_THREE_DAYS: d-30c27e099a544e409e8658e2874a911e     #3天后提醒去检查车
+      INSPECTION_TODAY: d-e8fd8ba8bbb04af8a3d4c4a2f988835c          #今天提醒去检查车
+      INSPECTION_COMPLETE: d-808aa63280b84df1b2b6d80dff580ec2       #检查完成
+      ISSUE_CONFIRM: d-4cf9eac5e03d4112aea9661c99372bc1             #issue完成
+      VERIFY_EMAIL: d-593fca817e964ea9b922c6735d6b31f6              #注册或更改登录邮箱 发送验证码
+  sms:  #短信配置
+    apiKey: 3223caf1
+    apiSecret: c784417c2c86e0d9
+    from: 12067177275

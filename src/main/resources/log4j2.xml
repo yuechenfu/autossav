@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="off" monitorInterval="1800">
+	<Appenders>
+ 		<Console name="Console" target="SYSTEM_OUT">
+ 			<PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n" />
+ 		</Console>
+ 		<File name="Test" fileName="logs/test.log" append="false">
+ 			<PatternLayout pattern="%d{HH:mm:ss:SSS} %-5level %class{36} %L %M - %msg%xEx%n"/>
+ 		</File>
+ 		<RollingFile name="RollingFileInfo" fileName="logs/info.log" filePattern="logs/$${date:yyyy-MM}/info-%d{yyyy-MM-dd}-%i.log">
+ 			<ThresholdFilter level="info" onMatch="ACCEPT" onMismatch="DENY"/>
+ 			<PatternLayout pattern="[%d{HH:mm:ss}] [%p] %c{1}.%M - %logger%n     ---- %m%n"/>
+ 			<Policies>
+ 				<TimeBasedTriggeringPolicy/>
+ 				<SizeBasedTriggeringPolicy size="100 MB"/>
+ 			</Policies>
+ 		</RollingFile>
+ 		<RollingFile name="RollingFileError" fileName="logs/error.log" filePattern="logs/$${date:yyyy-MM}/error-%d{yyyy-MM-dd}-%i.log">
+ 			<ThresholdFilter level="error" onMatch="ACCEPT" onMismatch="DENY"/>
+ 			<PatternLayout pattern="[%d{HH:mm:ss:SSS}] [%p] - %logger%n     --- %l %m%n"/>
+ 			<Policies>
+ 				<TimeBasedTriggeringPolicy/>
+ 				<SizeBasedTriggeringPolicy size="100 MB"/>
+ 			</Policies>
+ 		</RollingFile>
+ 	</Appenders>
+	<Loggers>         
+		<logger name="org.springframework" level="debug"/>
+		<logger name="org.apache" level="debug"/>
+		<logger name="org.mybatis" level="debug"/>
+		<logger name="com.mysql" level="debug"/>
+		<logger name="com.hiveel" level="debug"/>
+
+		<Root level="info">
+			<AppenderRef ref="Console" />
+			<AppenderRef ref="Test"/>
+			<AppenderRef ref="RollingFileInfo" />
+			<AppenderRef ref="RollingFileError" />
+		</Root>
+	</Loggers>
+</Configuration>
